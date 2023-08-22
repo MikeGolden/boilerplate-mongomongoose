@@ -9,13 +9,13 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 const Schema = mongoose.Schema;
 
-const personSchema = new Schema({
+var personSchema = new Schema({
   name: { type: String, required: true },
   age: Number,
   favoriteFoods: [String]
 });
 
-const Person = mongoose.model("Person", personSchema);
+var Person = mongoose.model("Person", personSchema);
 
 var createAndSavePerson = function(done) {
   var janeFonda = new Person({name: "Jane Fonda", age: 84, favoriteFoods: ["eggs", "fish", "fresh fruit"]});
@@ -26,14 +26,18 @@ var createAndSavePerson = function(done) {
   });
 };
 
-// let Person;
+/** 4) Create many People with `Model.create()` */
+var arrayOfPeople = [
+  {name: "Frankie", age: 74, favoriteFoods: ["Del Taco"]},
+  {name: "Sol", age: 76, favoriteFoods: ["roast chicken"]},
+  {name: "Robert", age: 78, favoriteFoods: ["wine"]}
+];
 
-// const createAndSavePerson = (done) => {
-//   done(null /*, data*/);
-// };
-
-const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+var createManyPeople = function(arrayOfPeople, done) {
+  Person.create(arrayOfPeople, function (err, people) {
+    if (err) return console.log(err);
+    done(null, people);
+  });
 };
 
 const findPeopleByName = (personName, done) => {

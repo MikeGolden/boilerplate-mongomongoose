@@ -28,9 +28,9 @@ var createAndSavePerson = function(done) {
 
 // let Person;
 
-const createAndSavePerson = (done) => {
-  done(null /*, data*/);
-};
+// const createAndSavePerson = (done) => {
+//   done(null /*, data*/);
+// };
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
